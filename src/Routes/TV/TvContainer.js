@@ -1,6 +1,6 @@
 import React from 'react';
 import { tvApi } from '../../api';
-import TVPresenter from './TVPresenter';
+import TvPresenter from './TvPresenter';
 
 export default class extends React.Component {
   state = {
@@ -41,7 +41,7 @@ export default class extends React.Component {
   render() {
     const { topRated, popular, airingToday, loading, error } = this.state;
     return (
-      <TVPresenter
+      <TvPresenter
         topRated={topRated}
         popular={popular}
         airingToday={airingToday}
