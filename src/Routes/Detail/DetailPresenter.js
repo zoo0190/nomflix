@@ -2,12 +2,12 @@ import React from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Loader from 'Components/Loader';
+import Loader from '../../Components/Loader';
 import noImage from '../../assets/doolys-welcome.png';
 import { Helmet } from 'react-helmet';
-import Message from 'Components/Message';
-import Poster from 'Components/Poster';
-import Section from 'Components/Section';
+import Message from '../../Components/Message';
+import Poster from '../../Components/Poster';
+import Section from '../../Components/Section';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
