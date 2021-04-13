@@ -6,6 +6,7 @@ import noImage from '../assets/doolys-welcome.png';
 
 const Container = styled.div`
   font-size: 12px;
+  padding: 0 ${props => (props.detailPadding ? '4px' : '0')};
 `;
 
 const Image = styled.div`
@@ -48,13 +49,21 @@ const Year = styled.span`
   color: rgba(255, 255, 255, 0.5);
 `;
 
-const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
+const Poster = ({
+  id,
+  imageUrl,
+  title,
+  rating,
+  year,
+  isMovie = false,
+  detailPadding,
+}) => (
   <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}>
-    <Container>
+    <Container detailPadding={detailPadding}>
       <ImageContainer>
         <Image
           bgUrl={
-            imageUrl ? `https://image.tmdb.org/t/p/w500${imageUrl}` : noImage
+            imageUrl ? `https://image.tmdb.org/t/p/w200${imageUrl}` : noImage
           }
         />
         {rating && (

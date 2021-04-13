@@ -7,6 +7,7 @@ import noImage from '../../assets/doolys-welcome.png';
 import { Helmet } from 'react-helmet';
 import Message from 'Components/Message';
 import Poster from 'Components/Poster';
+import Section from 'Components/Section';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -81,16 +82,23 @@ const ImdbLink = styled.a`
 
 const StyledSlider = styled(Slider)`
   margin-top: 25px;
-  width: 125px;
+  width: ${props => (props.length === 1 ? '12.5%' : '25%')};
 `;
 
-const DetailPresenter = ({ result, error, loading }) => {
+const VideosWrapper = styled.select`
+  display: block;
+  margin-top: 5px;
+  background: transparent;
+  color: white;
+  outline: none;
+`;
+
+const YoutubeLink = styled.option``;
+
+const DetailPresenter = ({ result, error, loading, videos }) => {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
   };
   return loading ? (
     <>
@@ -145,6 +153,13 @@ const DetailPresenter = ({ result, error, loading }) => {
                     : `${genre.name} / `
                 )}
             </Item>
+            {result.production_countries &&
+              result.production_countries.map((value, idx) => (
+                <span key={idx}>
+                  <Divider>·</Divider>
+                  <Item>{value.iso_3166_1}</Item>
+                </span>
+              ))}
           </ItemContainer>
           <Overview>{result.overview}</Overview>
           {result.imdb_id && (
@@ -155,16 +170,56 @@ const DetailPresenter = ({ result, error, loading }) => {
               Go to Imdb 👉
             </ImdbLink>
           )}
-          <StyledSlider {...settings}>
-            {result.seasons &&
-              result.seasons.map(value => (
-                <Poster
-                  id={value.id}
-                  imageUrl={value.poster_path}
-                  title={value.name}
-                />
+          <VideosWrapper
+            onChange={e =>
+              e.target.value && window.open(e.target.value, '_blank')
+            }
+          >
+            <YoutubeLink value="">Do you wanna videos? ✅</YoutubeLink>
+            {videos &&
+              videos.results.map(value => (
+                <YoutubeLink
+                  key={value.id}
+                  value={`https://www.youtube.com/watch?v=${value.key}`}
+                  target="_blank"
+                >
+                  {value.name}
+                </YoutubeLink>
               ))}
-          </StyledSlider>
+          </VideosWrapper>
+          {result.seasons && (
+            <StyledSlider
+              {...settings}
+              slidesToShow={result.seasons.length === 1 ? 1 : 2}
+              slidesToScroll={result.seasons.length === 1 ? 1 : 2}
+              length={result.seasons.length}
+            >
+              {result.seasons &&
+                result.seasons.map(value => (
+                  <Poster
+                    key={value.id}
+                    id={value.id}
+                    imageUrl={value.poster_path}
+                    title={value.name}
+                    detailPadding={true}
+                  />
+                ))}
+            </StyledSlider>
+          )}
+          {result.production_companies && (
+            <Section>
+              {result.production_companies &&
+                result.production_companies.map(value => (
+                  <Poster
+                    key={value.id}
+                    id={value.id}
+                    imageUrl={value.logo_path}
+                    title={value.name}
+                    detailPadding={true}
+                  />
+                ))}
+            </Section>
+          )}
         </Data>
       </Content>
     </Container>

@@ -24,6 +24,7 @@ export const moviesApi = {
         query: term,
       },
     }),
+  videos: id => api.get(`movie/${id}/videos`),
 };
 
 export const tvApi = {
@@ -42,4 +43,5 @@ export const tvApi = {
         query: term,
       },
     }),
+  videos: id => api.get(`tv/${id}/videos`),
 };
