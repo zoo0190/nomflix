@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { moviesApi, tvApi } from 'api';
 import React from 'react';
 import DetailPresenter from './DetailPresenter';

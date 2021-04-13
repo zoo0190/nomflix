@@ -1,6 +1,5 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { tvApi } from 'api';
 import React from 'react';
+import { tvApi } from 'api';
 import TVPresenter from './TVPresenter';
 
 export default class extends React.Component {
