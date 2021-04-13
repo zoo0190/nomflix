@@ -29,11 +29,9 @@
     "predeploy": "yarn run build"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
+  "homepage": "https://zoo0190.github.io/nomflix",
   "browserslist": {
     "production": [
       ">0.2%",
